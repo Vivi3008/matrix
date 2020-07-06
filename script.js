@@ -20,60 +20,27 @@
             res.classList.remove('hide')
             res.innerHTML=""
 
-         let p1
-         let p2
-         let p3
-
-         let s1
-         let s2
-         let s3
+         let m = []
+    
         
-         let sum=0
-            //soma diagonal primaria
-            divs.forEach(div => {
-                
-                if(div.dataset.id==1){
-                    p1 = Number(div.textContent)
-                    div.classList.add('pink')
-                }
-                if(div.dataset.id==5){
-                    p2 =  Number(div.textContent)
-                    div.classList.add('pink')
-                }
-                if(div.dataset.id==9){
-                    p3 =  Number(div.textContent)
-                    div.classList.add('pink')
-                }
-
+             divs.forEach(div => {
+                 m.push(Number(div.textContent))
+                 div.style.backgroundColor = `${getRandomColor()}`
              })
-            //soma diagonal secundaria
-            divs.forEach(div => {
-                
-            if(div.dataset.id==3){
-                s1 = Number(div.textContent)
-                div.classList.add('green')
-            }
-            if(div.dataset.id==5){
-                s2 =  Number(div.textContent)
-                div.classList.add('green')
-            }
-            if(div.dataset.id==7){
-                s3 =  Number(div.textContent)
-                div.classList.add('green')
-            }
-
-             })
-             //soma de todos elementos
-        divs.forEach(div=>{
-         sum = sum +  Number(div.textContent)
-        })
-     
-        let sumPrim = p1+p2+p3
-        let sumSec = s1+s2+s3
             
-      res.innerHTML += `<p>Soma da diagonal primária: ${sumPrim}</p>` 
-      res.innerHTML += `<p>Soma da diagonal secundária: ${sumSec}</p>` 
-      res.innerHTML += `<p>Soma de todos elementos: ${sum}</p>`      
+            
+             
+              
+            prim = m[0]+ m[4]+ m[8]
+            
+            sec = m[2] + m[4] + m[6]
+
+            total = m.reduce((total,next)=> total + next)
+
+             
+      res.innerHTML += `<p>Soma da diagonal primária: ${prim}</p>` 
+      res.innerHTML += `<p>Soma da diagonal secundária: ${sec}</p>` 
+      res.innerHTML += `<p>Soma de todos elementos: ${total}</p>`      
 
         
     }
@@ -82,10 +49,18 @@
         
         divs.forEach(div=>{
             div.textContent = ""
-            div.classList.remove('pink')
-            div.classList.remove('green')
+            div.style.backgroundColor = 'aliceblue'
         })
 
         res.classList.add('hide')
         
     }
+
+    function getRandomColor() {
+        var letters = "0123456789ABCDEF";
+        var color = "#";
+        for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+       }
